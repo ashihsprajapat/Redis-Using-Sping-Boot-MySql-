@@ -2,7 +2,7 @@
 FROM eclipse-temurin:21-jdk
 
 # Set working directory
-WORKDIR /app
+WORKDIR /src
 
 # Copy jar file
 COPY target/*.jar app.jar
