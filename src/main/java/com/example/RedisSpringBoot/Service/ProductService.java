@@ -28,14 +28,14 @@ public class ProductService {
     public ResponseEntity<List<Product>> getAllProduct() {
 
         log.info("Fetching all Products");
-        simulateSlowDBCall();
+       // simulateSlowDBCall();
         return  ResponseEntity.status(HttpStatus.OK).body(productRepository.findAll());
     }
 
     @Cacheable(value = "product", key = "#id")
     public  Product getById(Long id) {
        log.info("Getting Product by Id");
-        simulateSlowDBCall();
+       // simulateSlowDBCall();
         Optional<Product> optionalProduct =  productRepository.findById(id);
         if(optionalProduct.isPresent()){
             log.info("finding from products");
@@ -47,7 +47,7 @@ public class ProductService {
 
     public  Product createProduct(ProductRequest productRequest) {
         log.info("Create product int data base");
-        simulateSlowDBCall();
+        //simulateSlowDBCall();
         Product prod= new Product();
 
         prod.setName(productRequest.getName());
@@ -63,7 +63,7 @@ public class ProductService {
     @CachePut(value = "product", key = "#id")
     public @Nullable Product update(Long id, ProductRequest productRequest) {
         log.info("Update product from database");
-        simulateSlowDBCall();
+        //simulateSlowDBCall();
         Product getProd= getById(id);
         if(getProd == null){
             log.info("Product not found");
@@ -86,7 +86,7 @@ public class ProductService {
     @CacheEvict(value = "product", key = "#id",  beforeInvocation = true)
     public String  delete(Long id) {
         log.info("Delete the product ");
-        simulateSlowDBCall();
+       // simulateSlowDBCall();
         Product getProd= getById(id);
         if(getProd == null){
             log.info("Product not found");
